@@ -10,7 +10,7 @@ SRC_URI = "git://github.com/WebPlatformForEmbedded/WPEFrameworkPlugins.git;proto
            file://osmc-devinput-remote.json \
            "
 
-SRCREV = "17ba861c4ff1f2e5435e65e9fab2935cd2bef404"
+SRCREV = "567fa9692e8ccd78bddd95051dbe305df0d2def9"
 
 # ----------------------------------------------------------------------------
 
@@ -42,6 +42,7 @@ PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'playready_nexus_svp',  'opencdmi_prnx_svp', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'playready_vg',         'opencdmi_vgrdm', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'widevine',             'opencdmi_wv', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'widevine_nexus_svp',   'opencdmi_wvnx_svp', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'wpeframework',         'network', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'wifi',                'network wifi', '', d)} \
     deviceinfo dictionary locationsync monitor remote remote-devinput timesync tracing ux virtualinput webkitbrowser webserver youtube \
