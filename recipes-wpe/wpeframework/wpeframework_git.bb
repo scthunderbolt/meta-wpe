@@ -16,8 +16,9 @@ SRC_URI = "git://github.com/WebPlatformForEmbedded/WPEFramework.git;protocol=git
            file://wpeframework-init \
            file://wpeframework.service.in \
            file://0001-Thread.cpp-Include-limits.h-for-PTHREAD_STACK_MIN-de.patch \
+           file://0002-BRCM-secbuf-usage-change-to-set-input-buffer-in-GLR.patch \
            "
-SRCREV = "b22c5bfd654ab2a3d8d4642cc2b9ecae2d088b37"
+SRCREV = "aa452ab1673e86b206f6737ec77d48ce8066437d"
 
 inherit cmake pkgconfig systemd update-rc.d
 
@@ -28,7 +29,8 @@ WPEFRAMEWORK_SYSTEM_PREFIX = "OE"
 PACKAGECONFIG ?= " \
     release \
     ${@bb.utils.contains('DISTRO_FEATURES', 'opencdm', 'opencdm opencdm_gst', '', d)} \
-    ${@bb.utils.contains('DISTRO_FEATURES', 'playready_nexus_svp', 'opencdmi_prnx_svp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'playready_nexus_svp', 'opencdmi_nexus_svp', '', d)} \
+    ${@bb.utils.contains('DISTRO_FEATURES', 'widevine_nexus_svp', 'opencdmi_nexus_svp', '', d)} \
     virtualinput websource webkitbrowser \
     "
 
@@ -49,7 +51,7 @@ PACKAGECONFIG[virtualinput]     = "-DVIRTUALINPUT=ON,-DVIRTUALINPUT=OFF,"
 # OCDM
 PACKAGECONFIG[opencdm]          = "-DCDMI=ON,-DCDMI=OFF,"
 PACKAGECONFIG[opencdm_gst]      = '-DCDMI_ADAPTER_IMPLEMENTATION="gstreamer",-DCDMI=OFF,gstreamer1.0'
-PACKAGECONFIG[opencdmi_prnx_svp]= '-DCDMI_BCM_NEXUS_SVP=ON -DCDMI_ADAPTER_IMPLEMENTATION="broadcom-svp",,'
+PACKAGECONFIG[opencdmi_nexus_svp]= '-DCDMI_BCM_NEXUS_SVP=ON -DCDMI_ADAPTER_IMPLEMENTATION="broadcom-svp",,'
 
 # FIXME
 # The WPEFramework also needs limited Plugin info in order to determine what to put in the "resumes" configuration
