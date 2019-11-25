@@ -5,21 +5,18 @@ PR = "r1"
 
 require include/wpeframework-plugins.inc
 
-SRC_URI = "git://github.com/WebPlatformForEmbedded/WPEFrameworkPlugins.git;protocol=git;branch=master \
-           file://0001-ensure-child-count-is-refershed-before-processing-re.patch \
-           file://0002-compositor-Add-nxserver-include-dirs-to-target.patch \
-           file://0003-Spark-Only-check-STREQUAL-if-value-exists.patch \
-           file://0004-WebKitBrowser-magic-number-for-required-child-moved-.patch \
+SRC_URI = "git://github.com/WebPlatformForEmbedded/WPEFrameworkPlugins.git;protocol=git;branch=development/WPE-318 \
            file://index.html \
            file://osmc-devinput-remote.json \
            "
-SRCREV = "886f9025b30a75eb19ed589066e09927b92463ec"
+SRCREV = "a31f84b8f17c62e1c09acab81b51ed7c20550b76"
 
 # ----------------------------------------------------------------------------
 
 # More complicated plugins are moved seperate includes
 
 include include/compositor.inc
+include include/firmwarecontrol.inc
 include include/ocdm.inc
 include include/power.inc
 include include/remotecontrol.inc
@@ -49,7 +46,7 @@ PACKAGECONFIG ?= " \
     ${@bb.utils.contains('DISTRO_FEATURES', 'widevine',             'opencdmi_wv', '', d)} \
     ${@bb.utils.contains('DISTRO_FEATURES', 'thunder',              'network', '', d)} \
     ${@bb.utils.contains('MACHINE_FEATURES', 'wifi',                'network wifi', '', d)} \
-    deviceinfo dictionary locationsync monitor remote remote-devinput spark timesync tracing ux virtualinput webkitbrowser webserver youtube \
+    deviceinfo dictionary firmwarecontrol locationsync monitor remote remote-devinput spark timesync tracing ux virtualinput webkitbrowser webserver youtube \
 "
 
 PACKAGECONFIG[bluetooth]      = "-DPLUGIN_BLUETOOTH=ON -DPLUGIN_BLUETOOTH_AUTOSTART=false,-DPLUGIN_BLUETOOTH=OFF,,dbus-glib bluez5"
