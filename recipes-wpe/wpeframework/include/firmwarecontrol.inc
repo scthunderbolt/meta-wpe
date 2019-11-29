@@ -1,4 +1,4 @@
-FIRMWARECONTROL_PLATFORM ?= "arris"
+FIRMWARECONTROL_PLATFORM ?= "none"
 WPE_FIRMWARECONTROL_EXTRAFLAGS += "${@bb.utils.contains('FIRMWARECONTROL_PLATFORM', 'rpi', '\
      -DPLUGIN_FIRMWARECONTROL_PLATFORM_RPI=ON \
 ', '', d)}"
@@ -15,6 +15,8 @@ WPE_FIRMWARECONTROL_EXTRAFLAGS += "${@bb.utils.contains('FIRMWARECONTROL_PLATFOR
 WPE_FIRMWARECONTROL_DEP ?= "${@bb.utils.contains('FIRMWARECONTROL_PLATFORM', 'rpi', 'mfrlibs-rpi', '', d)}"
 WPE_FIRMWARECONTROL_DEP ?= "${@bb.utils.contains('FIRMWARECONTROL_PLATFORM', 'broadcom', 'broadcom-mfrlib', '', d)}"
 WPE_FIRMWARECONTROL_DEP ?= "${@bb.utils.contains('FIRMWARECONTROL_PLATFORM', 'arris', 'flashapp-lib', '', d)}"
+
+DEPENDS += " ${WPE_FIRMWARECONTROL_DEP} "
 
 # Additional flags
 WPE_FIRMWARECONTROL_AUTOSTART 	?= "true"
